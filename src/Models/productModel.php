@@ -82,4 +82,10 @@
             $stmt = $this->db->prepare("DELETE FROM productos WHERE id = ?");
             return $stmt->execute([$id]);
         }
+
+        public function obtenerImagenes($id) {
+            $stmt = $this->db->prepare("SELECT imgProduct1, imgProduct2, imgProduct3, imgProduct4 FROM productos WHERE id = ?");
+            $stmt->execute([$id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
     }

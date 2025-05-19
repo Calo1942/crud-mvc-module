@@ -100,7 +100,7 @@
                         <div class="pb-3 bg-white rounded-3 shadow-sm" data-aos="fade-in">
                             <div class="p-4">
                                 <h1 class="mb-3 fs-2 fw-bold border-bottom pb-3">Agregar Producto</h1>
-                                <form action="guardar_producto.php" method="POST">
+                                <form action="/?url=product/create" method="POST">
                                     <div class="row g-4">
 
                                         <!-- Campos del formulario mejorados -->
@@ -126,6 +126,14 @@
 
                                         <div class="col-12">
                                             <div class="form-floating">
+                                                <input type="number" class="form-control" 
+                                                    id="cantidad" name="cantidad" required>
+                                                <label for="cantidad">Cantidad en stock</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-floating">
                                                 <select class="form-select rounded-1 border-dark" 
                                                         id="tallaProducto" name="talla" required>
                                                     <option value="S">S</option>
@@ -137,14 +145,18 @@
                                             </div>
                                         </div>
 
+                                        <?php for ($i = 1; $i <= 4; $i++): ?>
                                         <div class="col-12">
                                             <div class="form-floating">
-                                                <textarea class="form-control rounded-1 border-dark" 
-                                                        id="descripcionProducto" name="descripcion" 
-                                                        style="height: 100px" required></textarea>
-                                                <label for="descripcionProducto">Descripción</label>
+                                                <input type="url" class="form-control" 
+                                                    id="imgProduct<?= $i ?>" 
+                                                    name="imgProduct<?= $i ?>" 
+                                                    placeholder="URL de imagen <?= $i ?>"
+                                                    <?= $i === 1 ? 'required' : '' ?>>
+                                                <label for="imgProduct<?= $i ?>">Imagen <?= $i ?></label>
                                             </div>
                                         </div>
+                                        <?php endfor; ?>
 
                                         <div class="col-12">
                                             <div class="input-group border-dark rounded-1">

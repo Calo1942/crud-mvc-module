@@ -2,78 +2,85 @@
 namespace BruzDeporte\UptaebMvc\Controllers;
 
 class ProductController {
-    private $basePath;
     private $model;
     
     public function __construct() {
-        $this->basePath = __DIR__ . '/../';
-        require_once $this->basePath . 'models/productModel.php';
+        require_once __DIR__ . '/../models/productModel.php';
         $this->model = new \ProductoModel();
     }
 
     public function index() {
         $productos = $this->model->obtenerProductos();
-        require $this->basePath . 'views/productSee.php';
+        require __DIR__ . '/../views/product.php';
     }
 
-    public function create() {
+    public function agregar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->handleCreate();
-        } else {
-            require $this->basePath . 'views/productForm.php';
+            $data = [
+                'nombre' => $_POST['nombre'],
+                'descripcion' => $_POST['descripcion'],
+                'cantidad' => $_POST['stock'],
+                'talla' => $_POST['talla'],
+                'categoria' => $_POST['categoria'],
+                'precio' => $_POST['precio'],
+                'imgProduct1' => 'default.jpg' // Cambiar por lógica de subida de imágenes
+            ];
+
+            if ($this->model->crearProducto($data)) {
+                header('Location: '.BASE_URL.'?url=product');
+                exit;
+            }
         }
+        require __DIR__.'/../../views/product.php';
     }
 
-    private function handleCreate() {
+    private function procesarAgregar() {
         $data = [
             'nombre' => $_POST['nombre'],
             'descripcion' => $_POST['descripcion'],
-            'cantidad' => $_POST['cantidad'],
+            'cantidad' => $_POST['stock'],
             'talla' => $_POST['talla'],
             'categoria' => $_POST['categoria'],
             'precio' => $_POST['precio'],
-            'imgProduct1' => $_POST['imgProduct1'],
-            'imgProduct2' => $_POST['imgProduct2'] ?? null,
-            'imgProduct3' => $_POST['imgProduct3'] ?? null,
-            'imgProduct4' => $_POST['imgProduct4'] ?? null
+            'imgProduct1' => $this->procesarImagen($_FILES['imagen']),
         ];
-        
+
         if ($this->model->crearProducto($data)) {
-            header('Location: /?url=product/index');
+            header('Location: /?url=product');
         }
     }
 
-    public function edit($id) {
+    public function editar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->handleEdit($id);
-        } else {
-            $producto = $this->model->obtenerProducto($id);
-            require $this->basePath . 'views/productEdit.php';
+            $this->procesarEditar();
         }
     }
 
-    private function handleEdit($id) {
+    private function procesarEditar() {
         $data = [
             ':nombre' => $_POST['nombre'],
             ':descripcion' => $_POST['descripcion'],
-            ':cantidad' => $_POST['cantidad'],
+            ':cantidad' => $_POST['stock'],
             ':talla' => $_POST['talla'],
             ':categoria' => $_POST['categoria'],
             ':precio' => $_POST['precio'],
-            ':img1' => $_POST['imgProduct1'],
-            ':img2' => $_POST['imgProduct2'] ?? null,
-            ':img3' => $_POST['imgProduct3'] ?? null,
-            ':img4' => $_POST['imgProduct4'] ?? null
+            ':img1' => $this->procesarImagen($_FILES['imagen'], $_POST['id']),
         ];
-        
-        if ($this->model->actualizarProducto($id, $data)) {
-            header('Location: /?url=product/index');
+
+        if ($this->model->actualizarProducto($_POST['id'], $data)) {
+            header('Location: /?url=product');
         }
     }
 
-    public function delete($id) {
+    public function eliminar($id) {
         if ($this->model->eliminarProducto($id)) {
-            header('Location: /?url=product/index');
-        }
+            header('Location: '.BASE_URL.'?url=product');
+        };
+    }
+
+    private function procesarImagen($imagen, $id = null) {
+        // Lógica para subir/manejar imágenes
+        return $imagen['name'] ?? ($id ? $this->model->obtenerProducto($id)['imgProduct1'] : 'default.jpg');
     }
 }
+?>

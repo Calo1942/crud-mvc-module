@@ -14,8 +14,10 @@ class FrontController {
     }
 
     private function parseUrl() {
-        $url = explode('/', filter_var(rtrim($this->url, '/'), FILTER_SANITIZE_URL));
-        $this->controller = isset($url[0]) ? ucfirst($url[0]) . 'Controller' : 'ProductController';
+        $url = isset($_GET['url']) ? $_GET['url'] : 'product';
+        $url = explode('/', filter_var(rtrim($url, '/'), FILTER_SANITIZE_URL));
+        
+        $this->controller = isset($url[0]) ? ucfirst($url[0]).'Controller' : 'ProductController';
         $this->method = isset($url[1]) ? $url[1] : 'index';
         $this->params = array_slice($url, 2);
     }
