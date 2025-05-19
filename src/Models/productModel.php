@@ -71,10 +71,22 @@
                 imgProduct3 = :img3,
                 imgProduct4 = :img4
                 WHERE id = :id";
-            
             $stmt = $this->db->prepare($sql);
-            $data[':id'] = $id;
-            return $stmt->execute($data);
+            // Aseguramos que los nombres de los parámetros tengan los dos puntos y coincidan con la consulta
+            $params = [
+                ':nombre' => $data['nombre'],
+                ':descripcion' => $data['descripcion'],
+                ':cantidad' => $data['cantidad'],
+                ':talla' => $data['talla'],
+                ':categoria' => $data['categoria'],
+                ':precio' => $data['precio'],
+                ':img1' => $data['imgProduct1'],
+                ':img2' => $data['imgProduct2'],
+                ':img3' => $data['imgProduct3'],
+                ':img4' => $data['imgProduct4'],
+                ':id' => $id
+            ];
+            return $stmt->execute($params);
         }
 
         // DELETE

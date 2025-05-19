@@ -59,17 +59,20 @@ class ProductController {
 
     private function procesarEditar() {
         $data = [
-            ':nombre' => $_POST['nombre'],
-            ':descripcion' => $_POST['descripcion'],
-            ':cantidad' => $_POST['stock'],
-            ':talla' => $_POST['talla'],
-            ':categoria' => $_POST['categoria'],
-            ':precio' => $_POST['precio'],
-            ':img1' => $this->procesarImagen($_FILES['imagen'], $_POST['id']),
+            'nombre' => $_POST['nombre'],
+            'descripcion' => $_POST['descripcion'],
+            'cantidad' => $_POST['stock'],
+            'talla' => $_POST['talla'],
+            'categoria' => $_POST['categoria'],
+            'precio' => $_POST['precio'],
+            'imgProduct1' => $this->procesarImagen($_FILES['imagen'], $_POST['id']),
+            'imgProduct2' => null,
+            'imgProduct3' => null,
+            'imgProduct4' => null
         ];
 
         if ($this->model->actualizarProducto($_POST['id'], $data)) {
-            header('Location: /?url=product');
+            header('Location: '.BASE_URL.'?url=product');
         }
     }
 
