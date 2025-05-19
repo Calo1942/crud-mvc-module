@@ -79,6 +79,14 @@ class ProductController {
         };
     }
 
+    // Endpoint para obtener un producto por ID (AJAX)
+    public function obtener($id) {
+        $producto = $this->model->obtenerProducto($id);
+        header('Content-Type: application/json');
+        echo json_encode($producto);
+        exit;
+    }
+
     private function procesarImagen($imagen, $id = null) {
         $uploadDir = __DIR__ . '/../assets/images/products/';
         if (!is_dir($uploadDir)) {

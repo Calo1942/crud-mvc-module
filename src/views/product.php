@@ -72,6 +72,7 @@
                                             <li>
                                                 <a href="/?url=product/ver/<?= $producto['id'] ?>" 
                                                 class="dropdown-item btnVerProducto"
+                                                data-id="<?= $producto['id'] ?>"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#modalVerProducto">
                                                 Ver
@@ -247,34 +248,27 @@ eliminar
 
                 <div class="modal-body">
                     <div class="row g-4">
-
-                        <div class="col-12 col-md-6">
-                            <img id="modalProductoImagen" src="" alt="" class="img-fluid w-100 rounded border">
+                        <div class="col-md-5 text-center">
+                            <img id="modalProductoImagen" src="" alt="Imagen del producto" class="img-fluid mb-3" style="max-height: 250px; object-fit: contain;">
+                            <h5 id="modalProductoNombre" class="fw-bold mt-2"></h5>
                         </div>
-
-                        <div class="col-12 col-md-6">
-                            <div class="sticky-top top-5">
-                                <h2 class="fs-3 fw-bold" id="modalProductoNombre"></h2>
-
-                                <div class="mt-3 border-top pt-3">
-                                    <p class="mb-1 text-muted fw-bold">Categoría:</p>
-                                    <p class="mb-3" id="modalProductoCategoria"></p>
-
-                                    <p class="mb-1 text-muted fw-bold">Talla:</p>
-                                    <p class="mb-3" id="modalProductoTalla"></p>
-
-                                    <p class="mb-1 text-muted fw-bold">Descripción:</p>
-                                    <p class="mb-3" id="modalProductoDescripcion"></p>
-
-                                    <p class="mb-1 text-muted fw-bold">Stock disponible:</p>
-                                    <p class="mb-3" id="modalProductoStock"></p>
-
-                                    <p class="mb-1 text-muted fw-bold">Precio:</p>
-                                    <h4 class="fw-bold text-dark" id="modalProductoPrecio"></h4>
-                                </div>
+                        <div class="col-md-7">
+                            <div class="mb-2">
+                                <span class="fw-bold">Categoría:</span> <span id="modalProductoCategoria"></span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="fw-bold">Talla:</span> <span id="modalProductoTalla"></span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="fw-bold">Descripción:</span> <span id="modalProductoDescripcion"></span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="fw-bold">Stock disponible:</span> <span id="modalProductoStock"></span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="fw-bold">Precio:</span> <span id="modalProductoPrecio"></span>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -290,16 +284,28 @@ eliminar
     document.querySelectorAll('.btnVerProducto').forEach(button => {
         button.addEventListener('click', async function() {
             const id = this.getAttribute('data-id');
-            const response = await fetch(`/?url=product/obtener/${id}`);
-            const producto = await response.json();
-            
-            document.getElementById('modalProductoNombre').textContent = producto.nombre;
-            document.getElementById('modalProductoCategoria').textContent = producto.categoria;
-            document.getElementById('modalProductoTalla').textContent = producto.talla;
-            document.getElementById('modalProductoStock').textContent = producto.cantidad;
-            document.getElementById('modalProductoDescripcion').textContent = producto.descripcion;
-            document.getElementById('modalProductoPrecio').textContent = `$${producto.precio}`;
-            document.getElementById('modalProductoImagen').src = producto.imgProduct1;
+            try {
+                const response = await fetch('<?= BASE_URL ?>?url=product/obtener/' + id);
+                const producto = await response.json();
+                console.log('Producto recibido:', producto); // Para depuración
+                if (!producto || !producto.id) {
+                    alert('Producto no encontrado');
+                    return;
+                }
+                document.getElementById('modalProductoNombre').textContent = producto.nombre;
+                document.getElementById('modalProductoCategoria').textContent = producto.categoria;
+                document.getElementById('modalProductoTalla').textContent = producto.talla;
+                document.getElementById('modalProductoStock').textContent = producto.cantidad;
+                document.getElementById('modalProductoDescripcion').textContent = producto.descripcion;
+                document.getElementById('modalProductoPrecio').textContent = `$${producto.precio}`;
+                // Corregir la ruta de la imagen
+                const baseUrl = '<?= BASE_URL ?>';
+                const img = producto.imgProduct1 ? producto.imgProduct1 : 'default.jpg';
+                document.getElementById('modalProductoImagen').src = baseUrl + 'src/assets/images/products/' + img;
+            } catch (e) {
+                alert('Error procesando la respuesta del servidor');
+                console.error(e);
+            }
         });
     });
     </script>
