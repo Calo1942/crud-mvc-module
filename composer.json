@@ -1,0 +1,16 @@
+{
+    "name": "un_carlos/mvc-custom-design-un-carlos",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "UnCarlos\\MvcCustomDesignUnCarlos\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Un Carlos",
+            "email": "carlosj.pineda07@gmail.com"
+        }
+    ],
+    "require": {}
+}
