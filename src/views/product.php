@@ -313,16 +313,14 @@ eliminar
     <div class="modal fade" id="modalEditarProducto" tabindex="-1" aria-labelledby="modalEditarProductoLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="<?= BASE_URL ?>?url=product/editar" method="POST">
-                    <input type="hidden" name="id" value="<?= $producto['id'] ?? '' ?>">
+                <form action="<?= BASE_URL ?>?url=product/editar" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="id" id="editarProductoId" value="">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalEditarProductoLabel">Editar Producto</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
-
                     <div class="modal-body">
                         <div class="row g-3">
-
                             <!-- Nombre -->
                             <div class="col-12">
                                 <div class="form-floating">
@@ -330,7 +328,6 @@ eliminar
                                     <label for="editarNombreProducto">Nombre</label>
                                 </div>
                             </div>
-
                             <!-- Categoría -->
                             <div class="col-12">
                                 <div class="form-floating">
@@ -342,7 +339,6 @@ eliminar
                                     <label for="editarCategoriaProducto">Categoría</label>
                                 </div>
                             </div>
-
                             <!-- Talla -->
                             <div class="col-12">
                                 <div class="form-floating">
@@ -355,7 +351,6 @@ eliminar
                                     <label for="editarTallaProducto">Talla</label>
                                 </div>
                             </div>
-
                             <!-- Descripción -->
                             <div class="col-12">
                                 <div class="form-floating">
@@ -363,7 +358,6 @@ eliminar
                                     <label for="editarDescripcionProducto">Descripción</label>
                                 </div>
                             </div>
-
                             <!-- Precio -->
                             <div class="col-12">
                                 <div class="input-group border-dark rounded-1">
@@ -374,7 +368,6 @@ eliminar
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Stock -->
                             <div class="col-12">
                                 <div class="form-floating">
@@ -382,13 +375,18 @@ eliminar
                                     <label for="editarStockProducto">Stock disponible</label>
                                 </div>
                             </div>
-
-                            <!-- Imagen -->
+                            <!-- Imagen actual -->
+                            <div class="col-12">
+                                <label class="form-label">Imagen actual</label>
+                                <div id="editarImagenActualContainer">
+                                    <img id="editarImagenActual" src="" alt="Imagen actual" class="img-fluid mb-2" style="max-height:100px;object-fit:contain;">
+                                </div>
+                            </div>
+                            <!-- Imagen nueva -->
                             <div class="col-12">
                                 <label for="editarImagenProducto" class="form-label">Cambiar Imagen (opcional)</label>
                                 <input type="file" class="form-control rounded-1" id="editarImagenProducto" name="imagen">
                             </div>
-
                         </div>
                     </div>
 
@@ -403,12 +401,13 @@ eliminar
     </div>
     <script>
         // Editar producto
+        // Asegúrate de que el campo hidden existe y los IDs coinciden
+
         document.querySelectorAll('.btnEditarProducto').forEach(btn => {
             btn.addEventListener('click', async function() {
                 const id = this.getAttribute('data-id');
-                const response = await fetch(`/?url=product/obtener/${id}`);
+                const response = await fetch('<?= BASE_URL ?>?url=product/obtener/' + id);
                 const producto = await response.json();
-
                 document.getElementById('editarProductoId').value = id;
                 document.getElementById('editarNombreProducto').value = producto.nombre;
                 document.getElementById('editarCategoriaProducto').value = producto.categoria;
@@ -416,6 +415,10 @@ eliminar
                 document.getElementById('editarStockProducto').value = producto.cantidad;
                 document.getElementById('editarPrecioProducto').value = producto.precio;
                 document.getElementById('editarDescripcionProducto').value = producto.descripcion;
+                // Mostrar imagen actual
+                const baseUrl = '<?= BASE_URL ?>';
+                const img = producto.imgProduct1 ? producto.imgProduct1 : 'default.jpg';
+                document.getElementById('editarImagenActual').src = baseUrl + 'src/assets/images/products/' + img;
             });
         });
     </script>
