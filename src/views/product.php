@@ -51,7 +51,7 @@
                         <?php foreach ($productos as $producto): ?>
                             <tr class="border-bottom">
                                 <td class="col-2">
-                                    <img src="<?= BASE_URL . 'src/assets/images/products/' . ($producto['imgProduct1'] ?? 'default.jpg') ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>" class="img-fluid border">
+                                    <img src="<?= BASE_URL . 'src/storage/images/products/' . ($producto['imgProduct1'] ?? 'default.jpg') ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>" class="img-fluid border">
                                 </td>
                                 <td>
                                     <h6 class="mb-1"><?php echo htmlspecialchars($producto['nombre']); ?></h6>
@@ -231,7 +231,6 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
-eliminar
                 </form>
             </div>
         </div>
@@ -301,7 +300,7 @@ eliminar
                 // Corregir la ruta de la imagen
                 const baseUrl = '<?= BASE_URL ?>';
                 const img = producto.imgProduct1 ? producto.imgProduct1 : 'default.jpg';
-                document.getElementById('modalProductoImagen').src = baseUrl + 'src/assets/images/products/' + img;
+                document.getElementById('modalProductoImagen').src = baseUrl + 'src/storage/images/products/' + img;
             } catch (e) {
                 alert('Error procesando la respuesta del servidor');
                 console.error(e);
@@ -418,7 +417,7 @@ eliminar
                 // Mostrar imagen actual
                 const baseUrl = '<?= BASE_URL ?>';
                 const img = producto.imgProduct1 ? producto.imgProduct1 : 'default.jpg';
-                document.getElementById('editarImagenActual').src = baseUrl + 'src/assets/images/products/' + img;
+                document.getElementById('editarImagenActual').src = baseUrl + 'src/storage/images/products/' + img;
             });
         });
     </script>
