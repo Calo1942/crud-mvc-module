@@ -15,25 +15,28 @@
     <!-- Links Estilos -->
     <?php include_once __DIR__ . '/../config/components/initComponent.php'; ?>
     <?php echo $varHeader; ?>
-
+    
     <!-- Fix for custom scrollbar if JS is disabled-->
     <noscript>
         <style>
             /**
-          * Reinstate scrolling for non-JS clients
+            * Reinstate scrolling for non-JS clients
           */
             .simplebar-content-wrapper {
                 overflow: auto;
             }
         </style>
     </noscript>
-
+    
     <!-- Page Title -->
     <title>Bruz Deporte | Plantilla HTML Bootstrap 5</title>
-
+    
 </head>
 
 <body class="">
+
+    <!-- Load Navbar -->
+    <?php echo $navBar; ?>
 
     <section class="mt-0">
         <div class="container py-5">

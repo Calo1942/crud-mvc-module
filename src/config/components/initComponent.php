@@ -33,7 +33,7 @@
                     <div class="w-100">
                         <div class="d-flex justify-content-between align-items-center flex-wrap">
 
-                            <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0 order-0" href="./?url=index">
+                            <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0 order-0" href="#">
                                 <div class="d-flex align-items-center">
                                     <svg class="f-w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.53 72.26">
                                         <path d="M10.43,54.2h0L0,36.13,10.43,18.06,20.86,0H41.72L10.43,54.2Zm67.1-7.83L73,54.2,68.49,62,45,48.47,31.29,72.26H20.86l-5.22-9L52.15,0H62.58l5.21,9L54.06,32.82,77.53,46.37Z"
@@ -66,7 +66,7 @@
                                     <div class="search-overlay"></div>
                                     </li>
                                 <li class="ms-1 d-none d-lg-inline-block">
-                                    <a class="nav-link text-body" href="./?url=login">
+                                    <a class="nav-link text-body" href="#">
                                         Cuenta
                                     </a>
                                 </li>
@@ -131,8 +131,8 @@
                                                     <p class="m-0 fs-5 fw-bold">$422.99</p>
                                                 </div>
                                             </div>
-                                            <a href="./?url=cart" class="btn btn-outline-dark w-100 text-center mt-4" role="button">Ver Carrito</a>
-                                            <a href="./?url=checkout" class="btn btn-dark w-100 text-center mt-2" role="button">Proceder al Pago</a>
+                                            <a href="#" class="btn btn-outline-dark w-100 text-center mt-4" role="button">Ver Carrito</a>
+                                            <a href="#" class="btn btn-dark w-100 text-center mt-2" role="button">Proceder al Pago</a>
                                         </div>
                                         </div>
                                     </li>
@@ -142,7 +142,7 @@
 
                                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./?url=category" role="button">
+                                        <a class="nav-link" href="#" role="button">
                                             Oferta
                                         </a>
                                     </li>
@@ -152,14 +152,14 @@
                                             Páginas
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="./?url=index">Página de inicio</a></li>
-                                            <li><a class="dropdown-item" href="./?url=category">Categoría</a></li>
-                                            <li><a class="dropdown-item" href="./?url=product">Producto</a></li>
-                                            <li><a class="dropdown-item" href="./?url=cart">Carrito</a></li>
-                                            <li><a class="dropdown-item" href="./?url=checkout">Pago</a></li>
-                                            <li><a class="dropdown-item" href="./?url=login">Iniciar sesión</a></li>
-                                            <li><a class="dropdown-item" href="./?url=register">Registrarse</a></li>
-                                            <li><a class="dropdown-item" href="./?url=forgotten_password">Contraseña olvidada</a></li>
+                                            <li><a class="dropdown-item" href="#">Página de inicio</a></li>
+                                            <li><a class="dropdown-item" href="#">Categoría</a></li>
+                                            <li><a class="dropdown-item" href="#">Producto</a></li>
+                                            <li><a class="dropdown-item" href="#">Carrito</a></li>
+                                            <li><a class="dropdown-item" href="#">Pago</a></li>
+                                            <li><a class="dropdown-item" href="#">Iniciar sesión</a></li>
+                                            <li><a class="dropdown-item" href="#">Registrarse</a></li>
+                                            <li><a class="dropdown-item" href="#">Contraseña olvidada</a></li>
                                         </ul>
                                     </li>
                                 </ul> 
