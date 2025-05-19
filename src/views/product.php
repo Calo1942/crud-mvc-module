@@ -51,13 +51,13 @@
                         <?php foreach ($productos as $producto): ?>
                             <tr class="border-bottom">
                                 <td class="col-2">
-                                    <img src="<?php echo $producto['imagenes'][0]; ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>" class="img-fluid border">
+                                    <img src="<?= BASE_URL . 'src/assets/images/products/' . ($producto['imgProduct1'] ?? 'default.jpg') ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>" class="img-fluid border">
                                 </td>
                                 <td>
                                     <h6 class="mb-1"><?php echo htmlspecialchars($producto['nombre']); ?></h6>
                                     <p class="text-muted mb-0"><span class="text-body">Categoría:</span> <?php echo htmlspecialchars($producto['categoria']); ?></p>
                                     <p class="text-muted mb-0"><span class="text-body">Talla:</span> <?php echo htmlspecialchars($producto['talla']); ?></p>
-                                    <p class="text-muted mb-0"><span class="text-body">Stock:</span> <?php echo htmlspecialchars($producto['stock']); ?></p>
+                                    <p class="text-muted mb-0"><span class="text-body">Stock:</span> <?= htmlspecialchars($producto['cantidad']) ?></p>
                                     <p class="text-muted mb-0"><span class="text-body">Descripción:</span> <?php echo htmlspecialchars($producto['descripcion']); ?></p>
                                 </td>
                                 <td class="text-end fw-bold">
@@ -148,7 +148,7 @@
     <div class="modal fade" id="modalAgregarProducto" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="<?= BASE_URL ?>?url=product/agregar" method="POST">
+                <form action="<?= BASE_URL ?>?url=product/agregar" method="POST" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalLabel">Agregar Producto</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>

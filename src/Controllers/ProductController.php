@@ -16,6 +16,7 @@ class ProductController {
 
     public function agregar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $imgName = $this->procesarImagen($_FILES['imagen']);
             $data = [
                 'nombre' => $_POST['nombre'],
                 'descripcion' => $_POST['descripcion'],
@@ -23,7 +24,7 @@ class ProductController {
                 'talla' => $_POST['talla'],
                 'categoria' => $_POST['categoria'],
                 'precio' => $_POST['precio'],
-                'imgProduct1' => 'default.jpg' // Cambiar por lógica de subida de imágenes
+                'imgProduct1' => $imgName
             ];
 
             if ($this->model->crearProducto($data)) {
@@ -79,8 +80,24 @@ class ProductController {
     }
 
     private function procesarImagen($imagen, $id = null) {
-        // Lógica para subir/manejar imágenes
-        return $imagen['name'] ?? ($id ? $this->model->obtenerProducto($id)['imgProduct1'] : 'default.jpg');
+        $uploadDir = __DIR__ . '/../assets/images/products/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+        if (isset($imagen['tmp_name']) && is_uploaded_file($imagen['tmp_name'])) {
+            $ext = pathinfo($imagen['name'], PATHINFO_EXTENSION);
+            $fileName = uniqid('prod_', true) . '.' . $ext;
+            $destPath = $uploadDir . $fileName;
+            if (move_uploaded_file($imagen['tmp_name'], $destPath)) {
+                return $fileName;
+            }
+        }
+        // Si no hay nueva imagen, devolver la anterior o default
+        if ($id) {
+            $producto = $this->model->obtenerProducto($id);
+            return $producto['imgProduct1'] ?? 'default.jpg';
+        }
+        return 'default.jpg';
     }
 }
 ?>
