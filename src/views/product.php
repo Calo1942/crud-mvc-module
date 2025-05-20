@@ -14,7 +14,7 @@
 
     <!-- Links Estilos -->
     <?php include_once __DIR__ . '/../config/components/initComponent.php'; ?>
-    <?php echo $varHeader; ?>
+    <?= $varHeader; ?>
     
     <!-- Fix for custom scrollbar if JS is disabled-->
     <noscript>
@@ -36,7 +36,7 @@
 <body class="">
 
     <!-- Load Navbar -->
-    <?php echo $navBar; ?>
+    <?= $navBar; ?>
 
     <section class="mt-0">
         <div class="container py-5">
@@ -57,18 +57,18 @@
                                     <img src="<?= BASE_URL . 'src/storage/images/products/' . ($producto['imgProduct1'] ?? 'default.jpg') ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>" class="img-fluid border">
                                 </td>
                                 <td>
-                                    <h6 class="mb-1"><?php echo htmlspecialchars($producto['nombre']); ?></h6>
-                                    <p class="text-muted mb-0"><span class="text-body">Categoría:</span> <?php echo htmlspecialchars($producto['categoria']); ?></p>
-                                    <p class="text-muted mb-0"><span class="text-body">Talla:</span> <?php echo htmlspecialchars($producto['talla']); ?></p>
+                                    <h6 class="mb-1"><?= htmlspecialchars($producto['nombre']); ?></h6>
+                                    <p class="text-muted mb-0"><span class="text-body">Categoría:</span> <?= htmlspecialchars($producto['categoria']); ?></p>
+                                    <p class="text-muted mb-0"><span class="text-body">Talla:</span> <?= htmlspecialchars($producto['talla']); ?></p>
                                     <p class="text-muted mb-0"><span class="text-body">Stock:</span> <?= htmlspecialchars($producto['cantidad']) ?></p>
-                                    <p class="text-muted mb-0"><span class="text-body">Descripción:</span> <?php echo htmlspecialchars($producto['descripcion']); ?></p>
+                                    <p class="text-muted mb-0"><span class="text-body">Descripción:</span> <?= htmlspecialchars($producto['descripcion']); ?></p>
                                 </td>
                                 <td class="text-end fw-bold">
-                                    $<?php echo number_format($producto['precio'], 2); ?>
+                                    $<?= number_format($producto['precio'], 2); ?>
                                 </td>
                                 <td class="text-end">
                                     <div class="dropdown">
-                                        <button class="btn btn-sm btn-light border dropdown-toggle" type="button" id="dropdownMenu<?php echo $producto['id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="btn btn-sm btn-light border dropdown-toggle" type="button" id="dropdownMenu<?= $producto['id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="ri-more-fill"></i>
                                         </button>
                                         <ul class="dropdown-menu">
@@ -109,45 +109,12 @@
     </section>
 
     <!-- Footer -->
-    <footer class="border-top py-5 mt-4  ">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row">
-                <div>
-                    <ul class="list-unstyled">
-                        <li class="d-inline-block me-1"><a class="text-decoration-none text-dark-hover transition-all"
-                                href="#"><i class="ri-instagram-fill"></i></a></li>
-                        <li class="d-inline-block me-1"><a class="text-decoration-none text-dark-hover transition-all"
-                                href="#"><i class="ri-facebook-fill"></i></a></li>
-                        <li class="d-inline-block me-1"><a class="text-decoration-none text-dark-hover transition-all"
-                                href="#"><i class="ri-twitter-fill"></i></a></li>
-                        <li class="d-inline-block me-1"><a class="text-decoration-none text-dark-hover transition-all"
-                                href="#"><i class="ri-snapchat-fill"></i></a></li>
-                    </ul>
-                </div>
-                <div class="d-flex align-items-center justify-content-end flex-column flex-lg-row">
-                    <p class="small m-0 text-center text-lg-start">&copy; 2025 Bruz Deportes Todos los derechos reservados</p>
-                    <ul class="list-unstyled mb-0 ms-lg-4 mt-3 mt-lg-0 d-flex justify-content-end align-items-center">
-                        <li class="bg-light p-2 d-flex align-items-center justify-content-center me-2">
-                            <i class="pi pi-sm pi-paypal"></i>
-                        </li>
-                        <li class="bg-light p-2 d-flex align-items-center justify-content-center me-2">
-                            <i class="pi pi-sm pi-mastercard"></i>
-                        </li>
-                        <li class="bg-light p-2 d-flex align-items-center justify-content-center me-2">
-                            <i class="pi pi-sm pi-american-express"></i>
-                        </li>
-                        <li class="bg-light p-2 d-flex align-items-center justify-content-center"><i class="pi pi-sm pi-visa"></i>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer> <!-- / Footer-->
+    <?= $footer; ?>
+    <!-- / Footer -->
 
-    <!-- Theme JS -->
+    <!-- Custom JS & Theme JS -->
+    <?= $varJs; ?>
 
-    <!-- Custom JS -->
-    <?php echo $varJs; ?>
     <!-- Modal Agregar Producto -->
     <div class="modal fade" id="modalAgregarProducto" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

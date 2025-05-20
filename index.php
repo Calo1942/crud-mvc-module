@@ -1,7 +1,7 @@
 <?php
 
     require_once __DIR__ . '/vendor/autoload.php';
-    define('BASE_URL', 'http://localhost/uni/mvc-custom-design-un-carlos/');
+    define('BASE_URL', 'http://localhost/uni/mvc-custom-design-un-carlos/'); // Optimizar esto
 
     if (file_exists(__DIR__ . '/src/Controllers/FrontController.php')) {
         require_once(__DIR__ . '/src/Controllers/FrontController.php');
